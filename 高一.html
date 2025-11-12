@@ -712,19 +712,28 @@
         const avatarCard = document.createElement('div');
         avatarCard.className = 'flex items-center';
         
-        // 根据索引设置不同的位置调整
         // 根据数组长度和索引调整老师头像的位置
         if (teachersToDisplay.length === 3) {
-        if (index === 0) {
-        // 第一个老师整体向左移动一丢丢
-        avatarCard.classList.add('transform', 'translate-x-36'); // 整体向左移动一丢丢
-        } else if (index === 1) {
-        // 第二个老师整体向左移动一丢丢
-        avatarCard.classList.add('ml-28', 'transform', 'translate-x-36'); // 保持间距不变，整体向左移动一丢丢
-        } else if (index === 2) {
-        // 第三个老师整体向左移动一丢丢
-        avatarCard.classList.add('ml-56', 'transform', 'translate-x-36'); // 保持间距不变，整体向左移动一丢丢
-        }
+          if (index === 0) {
+            // 第一个老师位置
+            avatarCard.classList.add('ml-24');
+          } else if (index === 1) {
+            // 第二个老师位置
+            avatarCard.classList.add('ml-48');
+          } else if (index === 2) {
+            // 第三个老师位置
+            avatarCard.classList.add('ml-72');
+          }
+        } else if (teachersToDisplay.length === 2) {
+          // 两个老师时的位置
+          if (index === 0) {
+            avatarCard.classList.add('ml-36');
+          } else if (index === 1) {
+            avatarCard.classList.add('ml-60');
+          }
+        } else if (teachersToDisplay.length === 1) {
+          // 一个老师时的位置，居中显示
+          avatarCard.classList.add('ml-48');
         }
         
         // 创建头像图片
@@ -1159,20 +1168,25 @@
         setTimeout(() => {
           console.log('开始生成截图');
           
-          // 优化配置，提高图片清晰度
+          // 优化配置，提高图片清晰度，确保在Netlify等环境中正常工作
           const html2canvasOptions = {
             backgroundColor: '#ffffff',
             scale: 3, // 提高缩放比例到3，大幅增加清晰度
-            useCORS: true,
+            useCORS: true,  // 允许跨域图片
             allowTaint: true,
             logging: false,
             width: cloneContainer.offsetWidth,
             height: cloneContainer.offsetHeight,
-            delay: 300, // 增加延迟确保渲染完成
-            imageTimeout: 20000,
+            delay: 500, // 增加延迟确保渲染完成
+            imageTimeout: 30000, // 延长图片加载超时时间
             removeContainer: false,
             windowWidth: previewContainer.scrollWidth,
-            windowHeight: previewContainer.scrollHeight
+            windowHeight: previewContainer.scrollHeight,
+            scrollX: 0,
+            scrollY: 0,
+            x: 0,
+            y: 0,
+            logging: false
           };
           
           // 在克隆容器上执行截图
@@ -1181,37 +1195,78 @@
             document.body.removeChild(cloneContainer);
             
             // 核心功能：使用toDataURL + 创建a链接
-            function triggerDownload() {
-              // 使用toDataURL获取高质量图片数据
-              const imgData = canvas.toDataURL('image/png', 0.95); // 设置高质量参数
-              
-              // 创建下载链接元素
-              const downloadLink = document.createElement('a');
-              
-              // 设置文件名
-              const timestamp = new Date().toLocaleString('zh-CN').replace(/[\\/:*?"<>|]/g, '-');
-              downloadLink.download = `课表_${timestamp}.png`;
-              
-              // 设置链接地址为toDataURL
-              downloadLink.href = imgData;
-              
-              // 确保链接是可见的
-              downloadLink.style.position = 'absolute';
-              downloadLink.style.left = '-9999px';
-              
-              // 将临时链接appendChild到body
-              document.body.appendChild(downloadLink);
-              
-              // 直接调用click方法
-              downloadLink.click();
-              
-              // 清理 - 延迟移除
-              setTimeout(() => {
-                if (document.body.contains(downloadLink)) {
-                  document.body.removeChild(downloadLink);
+              function triggerDownload() {
+                try {
+                  // 使用toDataURL获取高质量图片数据
+                  const imgData = canvas.toDataURL('image/png', 0.95); // 设置高质量参数
+                  
+                  // 创建下载链接元素
+                  const downloadLink = document.createElement('a');
+                  
+                  // 设置文件名（避免使用特殊字符）
+                  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                  downloadLink.download = `高一规划课表_${timestamp}.png`;
+                  
+                  // 处理大数据URL，使用Blob方式提高兼容性
+                  const byteString = atob(imgData.split(',')[1]);
+                  const mimeString = imgData.split(',')[0].split(':')[1].split(';')[0];
+                  const ab = new ArrayBuffer(byteString.length);
+                  const ia = new Uint8Array(ab);
+                  for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                  }
+                  const blob = new Blob([ab], { type: mimeString });
+                  const url = URL.createObjectURL(blob);
+                  
+                  // 设置链接地址为Blob URL（更适合大文件，在Netlify环境中更稳定）
+                  downloadLink.href = url;
+                  
+                  // 确保链接是可见的
+                  downloadLink.style.position = 'absolute';
+                  downloadLink.style.left = '-9999px';
+                  
+                  // 将临时链接appendChild到body
+                  document.body.appendChild(downloadLink);
+                  
+                  // 使用setTimeout确保DOM已经更新
+                  setTimeout(() => {
+                    // 直接调用click方法
+                    downloadLink.click();
+                    
+                    // 清理 - 延迟移除
+                    setTimeout(() => {
+                      if (document.body.contains(downloadLink)) {
+                        document.body.removeChild(downloadLink);
+                      }
+                      // 释放Blob URL
+                      URL.revokeObjectURL(url);
+                    }, 300);
+                  }, 0);
+                } catch (e) {
+                  console.error('下载过程出错:', e);
+                  // 降级使用原始方法
+                  fallbackDownload();
                 }
-              }, 100);
-            }
+              }
+              
+              // 降级下载方法
+              function fallbackDownload() {
+                // 使用toDataURL获取高质量图片数据
+                const imgData = canvas.toDataURL('image/png', 0.95);
+                
+                // 创建下载链接元素
+                const downloadLink = document.createElement('a');
+                
+                // 设置文件名
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                downloadLink.download = `高一规划课表_${timestamp}.png`;
+                
+                // 设置链接地址为toDataURL
+                downloadLink.href = imgData;
+                
+                // 直接调用click方法
+                downloadLink.click();
+              }
             
             // 尝试触发下载
             try {
