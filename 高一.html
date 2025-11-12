@@ -880,13 +880,16 @@
         
         // 创建时间单元格（星期和时间在一行显示，星期居左，时间居右）
         const timeCell = document.createElement('td');
-        timeCell.innerHTML = `<div style="display: flex; align-items: center; justify-content: space-between;">
+        timeCell.innerHTML = `<div style="display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10;">
           <span>${day}</span>
           <span>${time}</span>
         </div>`;
         timeCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-gray-800";
-        // 添加明确的背景色，确保不会被下方行的背景色影响
+        // 添加明确的背景色和z-index，确保在html2canvas中不会被下方行遮挡
         timeCell.style.backgroundColor = '#ffffff';
+        timeCell.style.position = 'relative';
+        timeCell.style.zIndex = '10';
+        timeCell.style.isolation = 'isolate'; // 隔离元素，避免背景影响
         
         // 对于钟啸老师的课程，设置单元格跨3行（1节钟啸课+2节绑定课）
         if (teacher === '钟啸' && !processedZhongXiaoCourses.has(`${day}-${time}`)) {
@@ -942,7 +945,9 @@
           selectedCourses.forEach((boundCourse, boundIndex) => {
             // 创建绑定课程行
             const boundRow = document.createElement('tr');
-            boundRow.className = (index + boundIndex + 1) % 2 === 0 ? 'bg-white' : 'bg-blue-50/50';
+            // 不设置背景色，避免覆盖主时间单元格
+            boundRow.style.backgroundColor = 'transparent';
+            boundRow.style.position = 'relative';
             
             // 绑定课程不显示时间单元格，因为钟啸老师的时间单元格已经跨3行了
             // 直接创建空白单元格并设置为透明边框，避免影响表格布局
