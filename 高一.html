@@ -876,6 +876,8 @@
           <span>${time}</span>
         </div>`;
         timeCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-gray-800";
+        // 添加明确的背景色，确保不会被下方行的背景色影响
+        timeCell.style.backgroundColor = '#ffffff';
         
         // 对于钟啸老师的课程，设置单元格跨3行（1节钟啸课+2节绑定课）
         if (teacher === '钟啸' && !processedZhongXiaoCourses.has(`${day}-${time}`)) {
