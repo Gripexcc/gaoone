@@ -171,7 +171,7 @@
           <div class="flex justify-center">
             <div id="previewContainer" class="relative w-[1080px] h-[810px] bg-gray-100 border border-gray-200 rounded-lg overflow-hidden">
               <!-- 背景图片 -->
-              <img id="previewBackground" src="./h1.png" class="absolute inset-0 w-full h-full object-contain" alt="背景图片">
+             174: <img id="previewBackground" src="./h1.png?nf_resize=0" crossOrigin="anonymous" class="absolute inset-0 w-full h-full object-contain" alt="背景图片">
               
               <!-- 老师头像容器 -->
               <div id="teachersAvatarsContainer" class="absolute top-[16%] left-0 right-0 flex justify-center space-x-6 px-4">
@@ -1187,8 +1187,8 @@
             logging: false,
             width: cloneContainer.offsetWidth,
             height: cloneContainer.offsetHeight,
-            delay: 500, // 增加延迟确保渲染完成
-            imageTimeout: 30000, // 延长图片加载超时时间
+            delay: 3000, // 增加延迟确保渲染完成
+            imageTimeout: 60000, // 延长图片加载超时时间
             removeContainer: false,
             windowWidth: previewContainer.scrollWidth,
             windowHeight: previewContainer.scrollHeight,
@@ -1403,15 +1403,16 @@
           // 更新背景图片
           const channel = e.target.value;
           currentChannel = channel; // 更新当前渠道变量
-          // 根据不同渠道设置对应背景图片
+          // 根据不同渠道设置对应背景图片，添加?nf_resize=0参数禁用Netlify自动图片压缩
+          previewBackground.crossOrigin = "anonymous"; // 确保CORS设置正确
             if (channel === '胡源领衔') {
-              previewBackground.src = './h1.png';
+              previewBackground.src = './h1.png?nf_resize=0';
             } else if (channel === '白瑞芳领衔') {
-              previewBackground.src = './b1.png';
+              previewBackground.src = './b1.png?nf_resize=0';
             } else if (channel === 'j1') {
-              previewBackground.src = './j1.png';
+              previewBackground.src = './j1.png?nf_resize=0';
             } else {
-              previewBackground.src = './h1.png'; // 默认使用胡源领衔背景
+              previewBackground.src = './h1.png?nf_resize=0'; // 默认使用胡源领衔背景
             }
           
           // 重新初始化课程编辑区以应用新的渠道设置
