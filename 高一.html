@@ -1174,9 +1174,14 @@
           console.log('开始生成截图');
           
           // 优化配置，提高图片清晰度，确保在Netlify等环境中正常工作
+          // 针对不同背景图片设置不同缩放比例，解决白瑞芳渠道背景模糊问题
+          let scaleFactor = 3;
+          if (currentChannel === '白瑞芳领衔' || currentChannel === 'j1') {
+            scaleFactor = 10; // 白瑞芳和j1渠道背景图分辨率较低，提高缩放比例
+          }
           const html2canvasOptions = {
             backgroundColor: '#ffffff',
-            scale: 3, // 提高缩放比例到3，大幅增加清晰度
+            scale: scaleFactor, // 根据当前渠道调整缩放比例
             useCORS: true,  // 允许跨域图片
             allowTaint: true,
             logging: false,
