@@ -1181,7 +1181,7 @@
           // 针对不同背景图片设置不同缩放比例，解决白瑞芳渠道背景模糊问题
           let scaleFactor = 3;
           if (currentChannel === '白瑞芳领衔' || currentChannel === 'j1') {
-            scaleFactor = 10; // 白瑞芳和j1渠道背景图分辨率较低，提高缩放比例
+            scaleFactor = 3; // 降低教辅类渠道的缩放比例，避免图片过大
           }
           const html2canvasOptions = {
             backgroundColor: '#ffffff',
