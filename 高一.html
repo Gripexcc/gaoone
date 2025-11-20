@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>有道领世课表3.0pro</title>
+  <title>有道领世课表3.1</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -52,7 +52,7 @@
   <div class="max-w-7xl mx-auto px-4 py-8">
     <!-- 页面标题 -->
     <header class="text-center mb-8">
-      <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">有道领世课表3.0pro</h1>
+      <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">有道领世课表3.1</h1>
       <p class="text-gray-600">上方编辑，下方预览，一键三连</p>
     </header>
 
@@ -241,8 +241,7 @@
       ],
       '胡源': [
         '家长如何助孩子跨越思维断层，赢在高一',
-        '如何利用教辅书助力高一领先',
-        '【数学规划】妙解函数奇偶性对称问题',
+        '【导学课】如何利用教辅书助力高一领先',
         '【数学规划】妙解函数奇偶与对称性问题',
         '【数学规划】妙解集合创新压轴难题'
       ],
@@ -888,7 +887,7 @@
           <span>${day}</span>
           <span>${time}</span>
         </div>`;
-        timeCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-gray-800";
+        timeCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl font-medium text-gray-800";
         // 添加明确的背景色和z-index，确保在html2canvas中不会被下方行遮挡
         timeCell.style.backgroundColor = '#ffffff';
         timeCell.style.position = 'relative';
@@ -909,19 +908,19 @@
         // 创建主讲单元格
         const teacherCell = document.createElement('td');
         teacherCell.textContent = teacher;
-        teacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-gray-800";
+        teacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl font-medium text-center text-gray-800";
         row.appendChild(teacherCell);
         
         // 创建课程内容单元格
         const contentCell = document.createElement('td');
         contentCell.textContent = content;
-        contentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm text-left text-gray-800";
+        contentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl text-left text-gray-800";
         row.appendChild(contentCell);
         
         // 创建分值占比单元格
         const scoreCell = document.createElement('td');
         scoreCell.textContent = score;
-        scoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-indigo-600";
+        scoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl font-medium text-center text-indigo-600";
         row.appendChild(scoreCell);
         
         // 为胡源或白瑞芳的行添加粗体和红色字体样式
@@ -962,19 +961,19 @@
             // 创建主讲单元格
             const boundTeacherCell = document.createElement('td');
             boundTeacherCell.textContent = boundCourse.teacher;
-            boundTeacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-gray-800";
+            boundTeacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl font-medium text-center text-gray-800";
             boundRow.appendChild(boundTeacherCell);
             
             // 创建课程内容单元格
             const boundContentCell = document.createElement('td');
             boundContentCell.textContent = boundCourse.content;
-            boundContentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm text-left text-gray-800";
+            boundContentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl text-left text-gray-800";
             boundRow.appendChild(boundContentCell);
             
             // 创建分值占比单元格
             const boundScoreCell = document.createElement('td');
             boundScoreCell.textContent = boundCourse.score;
-            boundScoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-indigo-600";
+            boundScoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-xl font-medium text-center text-indigo-600";
             boundRow.appendChild(boundScoreCell);
             
             // 添加行到表格
