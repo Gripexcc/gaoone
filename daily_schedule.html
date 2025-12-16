@@ -75,8 +75,14 @@
         
         <!-- 课表头部 -->
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h2 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white">周五英才班体验课</h2>
+          <div class="relative">
+            <div class="flex items-center">
+              <h2 id="fridayTitleDisplay" class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white cursor-pointer">周五英才班体验课</h2>
+              <button id="fridayTitleEditBtn" class="ml-3 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </div>
+            <input id="fridayTitleInput" type="text" value="周五英才班体验课" class="hidden mt-2 w-full px-4 py-2 bg-white/90 text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 text-xl" />
           </div>
           <div>
             <button id="downloadFridayBtn" class="bg-white text-primary font-bold py-3 px-6 rounded-full flex items-center shadow-lg hover:bg-gray-100">
@@ -109,8 +115,14 @@
         
         <!-- 课表头部 -->
         <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h2 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white">周六英才班体验课</h2>
+          <div class="relative">
+            <div class="flex items-center">
+              <h2 id="saturdayTitleDisplay" class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white cursor-pointer">周六英才班体验课</h2>
+              <button id="saturdayTitleEditBtn" class="ml-3 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-all">
+                <i class="fa fa-pencil"></i>
+              </button>
+            </div>
+            <input id="saturdayTitleInput" type="text" value="周六英才班体验课" class="hidden mt-2 w-full px-4 py-2 bg-white/90 text-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-white/50 text-xl" />
           </div>
           <div>
             <button id="downloadSaturdayBtn" class="bg-white text-primary font-bold py-3 px-6 rounded-full flex items-center shadow-lg hover:bg-gray-100">
@@ -220,9 +232,9 @@
         // 卡片内容
         card.innerHTML = '<div class="p-4">' +
           '<div class="flex items-center mb-4">' +
-          '<div class="w-32 h-32 overflow-hidden">' +
-'<img src="' + imgSrc + '" alt="' + course.teacher + '" class="w-full h-full object-cover">' +
-'</div>' +
+          '<div class="w-32 h-32">' +
+          '<img src="' + imgSrc + '" alt="' + course.teacher + '" class="w-full h-full object-contain">' +
+          '</div>' +
           '<div class="ml-4 flex-1">' +
           '<div>' +
           '<div class="font-bold text-primary text-2xl">' + teacherTitle + '</div>' +
@@ -374,15 +386,22 @@
         btn.remove();
       });
       
+      // 专门移除编辑按钮（确保万无一失）
+      var editButtons = clone.querySelectorAll('[id*="TitleEditBtn"],[class*="edit"]');
+      editButtons.forEach(function(btn) {
+        btn.remove();
+      });
+      
+      // 移除其他可能的下载相关元素
       var downloadElements = clone.querySelectorAll('[id*="download"],[class*="download"],[id*="btn"],[class*="btn"]');
       downloadElements.forEach(function(element) {
         element.remove();
       });
       
-      // 优化配置，平衡图片质量和文件大小
+      // 优化配置，大幅提高图片清晰度
       var html2canvasOptions = {
         backgroundColor: '#ffffff',
-        scale: 1.5, // 合适的缩放比例，兼顾质量和文件大小
+        scale: 3, // 高缩放比例确保高质量图片
         useCORS: true,
         imageTimeout: 30000,
         width: clone.offsetWidth,
@@ -487,6 +506,159 @@
       document.body.removeChild(a);
     }
     
+    // 初始化标题编辑功能
+    function initTitleEditing() {
+      // 周五标题元素
+      var fridayTitleDisplay = document.getElementById('fridayTitleDisplay');
+      var fridayTitleEditBtn = document.getElementById('fridayTitleEditBtn');
+      var fridayTitleInput = document.getElementById('fridayTitleInput');
+      
+      // 周六标题元素
+      var saturdayTitleDisplay = document.getElementById('saturdayTitleDisplay');
+      var saturdayTitleEditBtn = document.getElementById('saturdayTitleEditBtn');
+      var saturdayTitleInput = document.getElementById('saturdayTitleInput');
+      
+      // 加载保存的标题
+      loadSavedTitles();
+      
+      // 周五标题编辑事件
+      fridayTitleEditBtn.addEventListener('click', function() {
+        toggleTitleEditMode('friday');
+      });
+      
+      fridayTitleDisplay.addEventListener('click', function() {
+        toggleTitleEditMode('friday');
+      });
+      
+      fridayTitleInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          saveTitle('friday');
+        } else if (e.key === 'Escape') {
+          cancelTitleEdit('friday');
+        }
+      });
+      
+      // 周六标题编辑事件
+      saturdayTitleEditBtn.addEventListener('click', function() {
+        toggleTitleEditMode('saturday');
+      });
+      
+      saturdayTitleDisplay.addEventListener('click', function() {
+        toggleTitleEditMode('saturday');
+      });
+      
+      saturdayTitleInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          saveTitle('saturday');
+        } else if (e.key === 'Escape') {
+          cancelTitleEdit('saturday');
+        }
+      });
+      
+      // 点击页面其他地方保存编辑
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('#fridayTitleDisplay') && 
+            !e.target.closest('#fridayTitleEditBtn') && 
+            !e.target.closest('#fridayTitleInput')) {
+          saveTitle('friday');
+        }
+        
+        if (!e.target.closest('#saturdayTitleDisplay') && 
+            !e.target.closest('#saturdayTitleEditBtn') && 
+            !e.target.closest('#saturdayTitleInput')) {
+          saveTitle('saturday');
+        }
+      });
+    }
+    
+    // 切换标题编辑模式
+    function toggleTitleEditMode(day) {
+      var displayEl = document.getElementById(day + 'TitleDisplay');
+      var editBtnEl = document.getElementById(day + 'TitleEditBtn');
+      var inputEl = document.getElementById(day + 'TitleInput');
+      
+      if (displayEl && inputEl) {
+        displayEl.classList.add('hidden');
+        editBtnEl.classList.add('hidden');
+        inputEl.classList.remove('hidden');
+        inputEl.focus();
+        inputEl.select();
+      }
+    }
+    
+    // 保存标题修改
+    function saveTitle(day) {
+      var displayEl = document.getElementById(day + 'TitleDisplay');
+      var editBtnEl = document.getElementById(day + 'TitleEditBtn');
+      var inputEl = document.getElementById(day + 'TitleInput');
+      
+      if (displayEl && inputEl) {
+        var newTitle = inputEl.value.trim() || (day === 'friday' ? '周五英才班体验课' : '周六英才班体验课');
+        displayEl.textContent = newTitle;
+        inputEl.value = newTitle;
+        
+        displayEl.classList.remove('hidden');
+        editBtnEl.classList.remove('hidden');
+        inputEl.classList.add('hidden');
+        
+        // 保存到localStorage
+        saveTitleToStorage(day, newTitle);
+      }
+    }
+    
+    // 取消标题编辑
+    function cancelTitleEdit(day) {
+      var displayEl = document.getElementById(day + 'TitleDisplay');
+      var editBtnEl = document.getElementById(day + 'TitleEditBtn');
+      var inputEl = document.getElementById(day + 'TitleInput');
+      
+      if (displayEl && inputEl) {
+        inputEl.value = displayEl.textContent;
+        
+        displayEl.classList.remove('hidden');
+        editBtnEl.classList.remove('hidden');
+        inputEl.classList.add('hidden');
+      }
+    }
+    
+    // 保存标题到localStorage
+    function saveTitleToStorage(day, title) {
+      try {
+        var savedTitles = JSON.parse(localStorage.getItem('dailyScheduleTitles') || '{}');
+        savedTitles[day] = title;
+        localStorage.setItem('dailyScheduleTitles', JSON.stringify(savedTitles));
+      } catch (error) {
+        console.error('保存标题失败:', error);
+      }
+    }
+    
+    // 从localStorage加载标题
+    function loadSavedTitles() {
+      try {
+        var savedTitles = JSON.parse(localStorage.getItem('dailyScheduleTitles') || '{}');
+        
+        if (savedTitles.friday) {
+          var fridayDisplay = document.getElementById('fridayTitleDisplay');
+          var fridayInput = document.getElementById('fridayTitleInput');
+          if (fridayDisplay && fridayInput) {
+            fridayDisplay.textContent = savedTitles.friday;
+            fridayInput.value = savedTitles.friday;
+          }
+        }
+        
+        if (savedTitles.saturday) {
+          var saturdayDisplay = document.getElementById('saturdayTitleDisplay');
+          var saturdayInput = document.getElementById('saturdayTitleInput');
+          if (saturdayDisplay && saturdayInput) {
+            saturdayDisplay.textContent = savedTitles.saturday;
+            saturdayInput.value = savedTitles.saturday;
+          }
+        }
+      } catch (error) {
+        console.error('加载标题失败:', error);
+      }
+    }
+    
     // 页面加载完成后初始化
     window.onload = function() {
       // 获取DOM元素
@@ -502,6 +674,9 @@
       
       // 初始化下载按钮
       initDownloadButtons();
+      
+      // 初始化标题编辑功能
+      initTitleEditing();
     };
   </script>
 </body>

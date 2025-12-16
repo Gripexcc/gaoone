@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>有道领世课表3.1</title>
+  <title>有道领世课表3.0pro</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -52,7 +52,7 @@
   <div class="max-w-7xl mx-auto px-4 py-8">
     <!-- 页面标题 -->
     <header class="text-center mb-8">
-      <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">有道领世课表3.1</h1>
+      <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">有道领世课表3.0pro</h1>
       <p class="text-gray-600">上方编辑，下方预览，一键三连</p>
     </header>
 
@@ -171,7 +171,7 @@
           <div class="flex justify-center">
             <div id="previewContainer" class="relative w-[1080px] h-[810px] bg-gray-100 border border-gray-200 rounded-lg overflow-hidden">
               <!-- 背景图片 -->
-             174: <img id="previewBackground" src="/h1.png" class="absolute inset-0 w-full h-full object-cover z-0" alt="背景图片">
+              <img id="previewBackground" src="./h1.png" class="absolute inset-0 w-full h-full object-contain" alt="背景图片">
               
               <!-- 老师头像容器 -->
               <div id="teachersAvatarsContainer" class="absolute top-[16%] left-0 right-0 flex justify-center space-x-6 px-4">
@@ -182,17 +182,17 @@
        <!-- 课程表格容器 -->
       <div id="tableContainer" class="absolute top-[0%] ml-6 w-[93%] px-2">
         <!-- 赠课表格将动态添加到预览容器底部 -->
-                <table class="w-full bg-white/90 backdrop-blur-sm border-collapse shadow-md rounded-lg overflow-hidden" style="table-layout: fixed;">
+                <table class="w-full bg-white/90 backdrop-blur-sm border-collapse shadow-md rounded-lg overflow-hidden">
                   <col style="width: 20%">
-                  <col style="width: 15%">
-                  <col style="width: 55%">
-                  <col style="width: 10%">
+                    <col style="width: 12%">
+                    <col style="width: 50%">
+                    <col style="width: 10%">
                   <thead>
                     <tr class="bg-gradient-to-r from-blue-50 to-indigo-50 shadow-sm">
-                      <th class="border border-blue-100 p-0.5 py-2 font-bold text-blue-800 text-lg text-center" colspan="1">时间</th>
-                      <th class="border border-blue-100 p-0.5 py-2 font-bold text-blue-800 text-lg text-center">主讲</th>
-                      <th class="border border-blue-100 p-0.5 py-2 font-bold text-blue-800 text-lg text-center">课程内容</th>
-                      <th class="border border-blue-100 p-0.5 py-2 font-bold text-blue-800 text-lg text-center">考试分值</th>
+                      <th class="border border-blue-100 p-0.5 py-3 font-bold text-blue-800 text-base text-center" colspan="1">时间</th>
+                      <th class="border border-blue-100 p-0.5 py-3 font-bold text-blue-800 text-base text-center">主讲</th>
+                      <th class="border border-blue-100 p-0.5 py-3 font-bold text-blue-800 text-base text-center" style="text-align: center;">课程内容</th>
+                      <th class="border border-blue-100 p-0.5 py-3 font-bold text-blue-800 text-base text-center">考试分值</th>
                     </tr>
                   </thead>
                   <tbody id="previewTableBody">
@@ -219,10 +219,10 @@
     
     // 教师图片和介绍信息
     const teacherInfo = {
-      '胡源' :{ img: './8.png', title: '数学-胡源', desc: '北京大学元培学院毕业\n独创"反命题教学法"\n擅长抽象问题具体化' },
-      '白瑞芳': { img: './9.jpg', title: '数学-白瑞芳', desc: '中国人民大学毕业\n河南跳级学霸更懂学习\n基础薄弱同学救星' },
-      '宁志远': { img: './2.png', title: '物理-宁志远', desc: '北京大学物理系博士\n高考物理满分\n十多年物理教学经验' },
-      '贾岚': { img: './3.png', title: '英语-贾岚', desc: '中国人民大学硕士\n美国哥伦比亚大学访问学者\n深耕英语教学14年' },
+      '胡源' :{ img: './8.png', title: '数学-胡源', desc: '北京大学元培学院毕业\n独创“反命题教学法”\n擅长抽象问题具体化' },
+      '白瑞芳': { img: './9.jpg', title: '数学-白瑞芳', desc: '前北京高考数学命题组顾问\n北京四中特级教师\n数学教育专家\n20年教学经验' },
+      '宁志远': { img: './2.png', title: '物理-宁志远', desc: '北京大学物理系博士\n高考物理满分\n十余年物理教学经验' },
+      '贾岚': { img: './3.png', title: '英语-贾岚', desc: '中国人民大学硕士\n美国哥伦比亚大学访学者\n深耕英语教学14年' },
       '赵晨曦': { img: './4.png', title: '英语-赵晨曦', desc: '清华大学硕士\n有道领世文综负责人\n独创"找字母做题法"' },
       '刘杰': { img: './5.png', title: '物理-刘杰', desc: '清华大学物理系毕业\n独创"物理口诀解题法"\n主编多本物理教辅' },
       '姜博杨': { img: './1.png', title: '语文-姜博杨', desc: '海归双料硕士\n有道领世语文负责人\n人民大学出版社签约作家' },
@@ -241,7 +241,7 @@
       ],
       '胡源': [
         '家长如何助孩子跨越思维断层，赢在高一',
-        '【导学课】如何利用教辅书助力高一领先',
+        '如何利用教辅书助力高一领先',
         '【数学规划】妙解函数奇偶与对称性问题',
         '【数学规划】妙解集合创新压轴难题'
       ],
@@ -271,17 +271,17 @@
     const contentScoreMap = {
       '家长如何助孩子跨越思维断层，赢在高一': '家长必听',
       '如何利用教辅书助力高一领先': '家长必听',
-      '【数学规划】妙解函数奇偶性对称问题': '8~11分',
-      '【数学规划】妙解函数奇偶与对称性问题': '8~11分',
-      '【数学规划】妙解集合创新压轴难题': '10~14分',
-      '【数学规划】口算函数奇偶性': '8~11分',
-      '【数学规划】高中视角看分式函数': '10~14分',
-      '【语文规划】妙笔生花—零基础升格一类文': '20~30分',
-      '【化学规划】1个公式掌握1000个化学方程式': '10~15分',
-      '【物理规划】学科迁移能力妙解力学问题': '20~30分',
-      '【物理规划】数形结合能力妙解运动学问题': '10~15分',
-      '【英语规划】搞懂一个公式拿下英语高分': '14~20分',
-      '【英语规划】一节课掌握高中英语高效学习法': '14~20分'
+      '【数学规划】妙解函数奇偶性对称问题': '8～11分',
+      '【数学规划】妙解函数奇偶与对称性问题': '8～11分',
+      '【数学规划】妙解集合创新压轴难题': '10～14分',
+      '【数学规划】口算函数奇偶性': '8～11分',
+      '【数学规划】高中视角看分式函数': '10～14分',
+      '【语文规划】妙笔生花—零基础升格一类文': '20～30分',
+      '【化学规划】1个公式掌握1000个化学方程式': '10～15分',
+      '【物理规划】学科迁移能力妙解力学问题': '20～30分',
+      '【物理规划】数形结合能力妙解运动学问题': '10～15分',
+      '【英语规划】搞懂一个公式拿下英语高分': '14～20分',
+      '【英语规划】一节课掌握高中英语高效学习法': '14～20分'
     };
     
     // 是否启用胡源领衔（用于控制是否启用内容绑定）
@@ -290,13 +290,13 @@
     // 默认课程数据
     const defaultCourses = [
       { id: 1, day: '周四', time: '19:00-19:40', teacher: '胡源', content: '家长如何助孩子跨越思维断层，赢在高一', score: '家长必听', isHighlight: true },
-      { id: 2, day: '周四', time: '20:00-20:40', teacher: '胡源', content: '【数学规划】妙解函数奇偶与对称性问题', score: '8~11分', isHighlight: false },
-      { id: 4, day: '周五', time: '18:00-18:40', teacher: '钟啸', content: '【化学规划】1个公式掌握1000个化学方程式', score: '10~15分', isHighlight: false },
-      { id: 3, day: '周五', time: '19:00-19:40', teacher: '姜博杨', content: '【语文规划】妙笔生花—零基础升格一类文', score: '60～70分', isHighlight: false },
-      { id: 5, day: '周五', time: '20:00-20:40', teacher: '刘杰', content: '【物理规划】数形结合能力妙解运动学问题', score: '10~15分', isHighlight: false },
-      { id: 6, day: '周六', time: '18:00-18:40', teacher: '赵晨曦', content: '【英语规划】搞懂一个公式拿下英语高分', score: '14~20分', isHighlight: false },
-      { id: 7, day: '周六', time: '19:00-19:40', teacher: '刘杰', content: '【物理规划】学科迁移能力妙解力学问题', score: '20~30分', isHighlight: false },
-      { id: 8, day: '周六', time: '20:00-20:40', teacher: '胡源', content: '【数学规划】妙解集合创新压轴难题', score: '10~14分', isHighlight: false }
+      { id: 2, day: '周四', time: '20:00-20:40', teacher: '胡源', content: '【数学规划】妙解函数奇偶与对称性问题', score: '8～11分', isHighlight: false },
+      { id: 3, day: '周五', time: '18:00-18:40', teacher: '姜博杨', content: '【语文规划】妙笔生花—零基础升格一类文', score: '20～30分', isHighlight: false },
+      { id: 4, day: '周五', time: '19:00-19:40', teacher: '钟啸', content: '【化学规划】1个公式掌握1000个化学方程式', score: '10～15分', isHighlight: false },
+      { id: 5, day: '周五', time: '20:00-20:40', teacher: '刘杰', content: '【物理规划】数形结合能力妙解运动学问题', score: '10～15分', isHighlight: false },
+      { id: 6, day: '周六', time: '18:00-18:40', teacher: '赵晨曦', content: '【英语规划】搞懂一个公式拿下英语高分', score: '14～20分', isHighlight: false },
+      { id: 7, day: '周六', time: '19:00-19:40', teacher: '刘杰', content: '【物理规划】学科迁移能力妙解力学问题', score: '20～30分', isHighlight: false },
+      { id: 8, day: '周六', time: '20:00-20:40', teacher: '胡源', content: '【数学规划】妙解集合创新压轴难题', score: '10～14分', isHighlight: false }
     ];
 
     // 赠课数据
@@ -337,10 +337,6 @@
     
     // 初始化课程编辑区
     function initCoursesEditor() {
-      // 为背景图片添加错误监听
-      previewBackground.onerror = function() {
-        console.error('背景图片加载失败:', this.src);
-      };
       coursesContainer.innerHTML = '';
       
       defaultCourses.forEach(course => {
@@ -715,28 +711,19 @@
         const avatarCard = document.createElement('div');
         avatarCard.className = 'flex items-center';
         
+        // 根据索引设置不同的位置调整
         // 根据数组长度和索引调整老师头像的位置
         if (teachersToDisplay.length === 3) {
-            if (index === 0) {
-              // 第一个老师位置 - 大幅度向右移动
-              avatarCard.classList.add('ml-48');
-            } else if (index === 1) {
-              // 第二个老师位置 - 大幅度向右移动
-              avatarCard.classList.add('ml-80');
-            } else if (index === 2) {
-              // 第三个老师位置 - 大幅度向右移动
-              avatarCard.classList.add('ml-112');
-            }
-        } else if (teachersToDisplay.length === 2) {
-          // 两个老师时的位置
-          if (index === 0) {
-            avatarCard.classList.add('ml-36');
-          } else if (index === 1) {
-            avatarCard.classList.add('ml-60');
-          }
-        } else if (teachersToDisplay.length === 1) {
-          // 一个老师时的位置，居中显示
-          avatarCard.classList.add('ml-48');
+        if (index === 0) {
+        // 第一个老师整体向左移动一丢丢
+        avatarCard.classList.add('transform', 'translate-x-36'); // 整体向左移动一丢丢
+        } else if (index === 1) {
+        // 第二个老师整体向左移动一丢丢
+        avatarCard.classList.add('ml-28', 'transform', 'translate-x-36'); // 保持间距不变，整体向左移动一丢丢
+        } else if (index === 2) {
+        // 第三个老师整体向左移动一丢丢
+        avatarCard.classList.add('ml-56', 'transform', 'translate-x-36'); // 保持间距不变，整体向左移动一丢丢
+        }
         }
         
         // 创建头像图片
@@ -774,10 +761,10 @@
       
       // 定义可选择的绑定课程 - 现在这些课程会显示在编辑区供选择
       const availableBoundCourses = [
-        { id: 1, teacher: '陈旭晨', content: '【生物规划】小学加减法速解蛋白质计算', score: '6~12分' },
-        { teacher: '李荟乐', content: '【地理规划】那些在高一被忽视的高考大考点', score: '6~10分' },
-        { teacher: '李珊玥', content: '【历史规划】高中历史提升指南', score: '6~11分' },
-        { teacher: '张博文', content: '【政治规划】一条线拿下高一政治大题', score: '10~16分' }
+        { id: 1, teacher: '陈旭晨', content: '【生物规划】小学加减法速解蛋白质计算', score: '6～12分' },
+        { teacher: '李荟乐', content: '【地理规划】那些在高一被忽视的高考大考点', score: '6～10分' },
+        { teacher: '李珊玥', content: '【历史规划】高中历史提升指南', score: '6～11分' },
+        { teacher: '张博文', content: '【政治规划】一条线拿下高一政治大题', score: '10～16分' }
       ];
       
       // 用于存储用户选择的绑定课程
@@ -883,24 +870,17 @@
         
         // 创建时间单元格（星期和时间在一行显示，星期居左，时间居右）
         const timeCell = document.createElement('td');
-        timeCell.innerHTML = `<div style="display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 10;">
+        timeCell.innerHTML = `<div style="display: flex; align-items: center; justify-content: space-between;">
           <span>${day}</span>
           <span>${time}</span>
         </div>`;
-        timeCell.className = "px-[0.3rem] py-1 border-2 border-blue-100 text-lg font-medium text-gray-800";
-        // 添加明确的背景色和z-index，确保在html2canvas中不会被下方行遮挡
-        timeCell.style.backgroundColor = '#ffffff';
-        timeCell.style.position = 'relative';
-        timeCell.style.zIndex = '10';
-        timeCell.style.isolation = 'isolate'; // 隔离元素，避免背景影响
+        timeCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-gray-800";
         
         // 对于钟啸老师的课程，设置单元格跨3行（1节钟啸课+2节绑定课）
         if (teacher === '钟啸' && !processedZhongXiaoCourses.has(`${day}-${time}`)) {
           timeCell.rowSpan = 3;
           // 垂直居中显示
           timeCell.style.verticalAlign = 'middle';
-          // 添加"三节同开"文本
-          timeCell.innerHTML += `<div class="text-xs text-red-500 font-bold mt-1">三节同开</div>`;
         }
         
         row.appendChild(timeCell);
@@ -908,19 +888,19 @@
         // 创建主讲单元格
         const teacherCell = document.createElement('td');
         teacherCell.textContent = teacher;
-        teacherCell.className = "px-[0.3rem] py-1 border-2 border-blue-100 text-lg font-medium text-center text-gray-800";
+        teacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-gray-800";
         row.appendChild(teacherCell);
         
         // 创建课程内容单元格
         const contentCell = document.createElement('td');
         contentCell.textContent = content;
-        contentCell.className = "px-[0.3rem] py-1 border-2 border-blue-100 text-lg text-left text-gray-800";
+        contentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm text-left text-gray-800";
         row.appendChild(contentCell);
         
         // 创建分值占比单元格
         const scoreCell = document.createElement('td');
         scoreCell.textContent = score;
-        scoreCell.className = "px-[0.3rem] py-1 border-2 border-blue-100 text-lg font-medium text-center text-indigo-600";
+        scoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-indigo-600";
         row.appendChild(scoreCell);
         
         // 为胡源或白瑞芳的行添加粗体和红色字体样式
@@ -948,9 +928,7 @@
           selectedCourses.forEach((boundCourse, boundIndex) => {
             // 创建绑定课程行
             const boundRow = document.createElement('tr');
-            // 不设置背景色，避免覆盖主时间单元格
-            boundRow.style.backgroundColor = 'transparent';
-            boundRow.style.position = 'relative';
+            boundRow.className = (index + boundIndex + 1) % 2 === 0 ? 'bg-white' : 'bg-blue-50/50';
             
             // 绑定课程不显示时间单元格，因为钟啸老师的时间单元格已经跨3行了
             // 直接创建空白单元格并设置为透明边框，避免影响表格布局
@@ -961,19 +939,19 @@
             // 创建主讲单元格
             const boundTeacherCell = document.createElement('td');
             boundTeacherCell.textContent = boundCourse.teacher;
-            boundTeacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-lg font-medium text-center text-gray-800 h-[2rem] leading-[1rem]";
+            boundTeacherCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-gray-800";
             boundRow.appendChild(boundTeacherCell);
             
             // 创建课程内容单元格
             const boundContentCell = document.createElement('td');
             boundContentCell.textContent = boundCourse.content;
-            boundContentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-lg text-left text-gray-800 h-[2rem] leading-[1rem]";
+            boundContentCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm text-left text-gray-800";
             boundRow.appendChild(boundContentCell);
             
             // 创建分值占比单元格
             const boundScoreCell = document.createElement('td');
             boundScoreCell.textContent = boundCourse.score;
-            boundScoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-lg font-medium text-center text-indigo-600 h-[2rem] leading-[1rem]";
+            boundScoreCell.className = "px-[0.3rem] py-2 border-2 border-blue-100 text-sm font-medium text-center text-indigo-600";
             boundRow.appendChild(boundScoreCell);
             
             // 添加行到表格
@@ -1176,30 +1154,20 @@
         setTimeout(() => {
           console.log('开始生成截图');
           
-          // 优化配置，提高图片清晰度，确保在Netlify等环境中正常工作
-          // 针对不同背景图片设置不同缩放比例，解决白瑞芳渠道背景模糊问题
-          let scaleFactor = 3;
-          if (currentChannel === '白瑞芳领衔' || currentChannel === 'j1') {
-            scaleFactor = 3; // 降低教辅类渠道的缩放比例，避免图片过大
-          }
+          // 优化配置，提高图片清晰度
           const html2canvasOptions = {
             backgroundColor: '#ffffff',
-            scale: scaleFactor, // 根据当前渠道调整缩放比例
-            useCORS: true,  // 允许跨域图片
+            scale: 3, // 提高缩放比例到3，大幅增加清晰度
+            useCORS: true,
             allowTaint: true,
             logging: false,
             width: cloneContainer.offsetWidth,
             height: cloneContainer.offsetHeight,
-            delay: 3000, // 增加延迟确保渲染完成
-            imageTimeout: 60000, // 延长图片加载超时时间
+            delay: 300, // 增加延迟确保渲染完成
+            imageTimeout: 20000,
             removeContainer: false,
             windowWidth: previewContainer.scrollWidth,
-            windowHeight: previewContainer.scrollHeight,
-            scrollX: 0,
-            scrollY: 0,
-            x: 0,
-            y: 0,
-            logging: false
+            windowHeight: previewContainer.scrollHeight
           };
           
           // 在克隆容器上执行截图
@@ -1208,78 +1176,37 @@
             document.body.removeChild(cloneContainer);
             
             // 核心功能：使用toDataURL + 创建a链接
-              function triggerDownload() {
-                try {
-                  // 使用toDataURL获取高质量图片数据
-                  const imgData = canvas.toDataURL('image/png', 0.95); // 设置高质量参数
-                  
-                  // 创建下载链接元素
-                  const downloadLink = document.createElement('a');
-                  
-                  // 设置文件名（避免使用特殊字符）
-                  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-                  downloadLink.download = `高一规划课表_${timestamp}.png`;
-                  
-                  // 处理大数据URL，使用Blob方式提高兼容性
-                  const byteString = atob(imgData.split(',')[1]);
-                  const mimeString = imgData.split(',')[0].split(':')[1].split(';')[0];
-                  const ab = new ArrayBuffer(byteString.length);
-                  const ia = new Uint8Array(ab);
-                  for (let i = 0; i < byteString.length; i++) {
-                    ia[i] = byteString.charCodeAt(i);
-                  }
-                  const blob = new Blob([ab], { type: mimeString });
-                  const url = URL.createObjectURL(blob);
-                  
-                  // 设置链接地址为Blob URL（更适合大文件，在Netlify环境中更稳定）
-                  downloadLink.href = url;
-                  
-                  // 确保链接是可见的
-                  downloadLink.style.position = 'absolute';
-                  downloadLink.style.left = '-9999px';
-                  
-                  // 将临时链接appendChild到body
-                  document.body.appendChild(downloadLink);
-                  
-                  // 使用setTimeout确保DOM已经更新
-                  setTimeout(() => {
-                    // 直接调用click方法
-                    downloadLink.click();
-                    
-                    // 清理 - 延迟移除
-                    setTimeout(() => {
-                      if (document.body.contains(downloadLink)) {
-                        document.body.removeChild(downloadLink);
-                      }
-                      // 释放Blob URL
-                      URL.revokeObjectURL(url);
-                    }, 300);
-                  }, 0);
-                } catch (e) {
-                  console.error('下载过程出错:', e);
-                  // 降级使用原始方法
-                  fallbackDownload();
-                }
-              }
+            function triggerDownload() {
+              // 使用toDataURL获取高质量图片数据
+              const imgData = canvas.toDataURL('image/png', 0.95); // 设置高质量参数
               
-              // 降级下载方法
-              function fallbackDownload() {
-                // 使用toDataURL获取高质量图片数据
-                const imgData = canvas.toDataURL('image/png', 0.95);
-                
-                // 创建下载链接元素
-                const downloadLink = document.createElement('a');
-                
-                // 设置文件名
-                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-                downloadLink.download = `高一规划课表_${timestamp}.png`;
-                
-                // 设置链接地址为toDataURL
-                downloadLink.href = imgData;
-                
-                // 直接调用click方法
-                downloadLink.click();
-              }
+              // 创建下载链接元素
+              const downloadLink = document.createElement('a');
+              
+              // 设置文件名
+              const timestamp = new Date().toLocaleString('zh-CN').replace(/[\\/:*?"<>|]/g, '-');
+              downloadLink.download = `课表_${timestamp}.png`;
+              
+              // 设置链接地址为toDataURL
+              downloadLink.href = imgData;
+              
+              // 确保链接是可见的
+              downloadLink.style.position = 'absolute';
+              downloadLink.style.left = '-9999px';
+              
+              // 将临时链接appendChild到body
+              document.body.appendChild(downloadLink);
+              
+              // 直接调用click方法
+              downloadLink.click();
+              
+              // 清理 - 延迟移除
+              setTimeout(() => {
+                if (document.body.contains(downloadLink)) {
+                  document.body.removeChild(downloadLink);
+                }
+              }, 100);
+            }
             
             // 尝试触发下载
             try {
@@ -1406,44 +1333,16 @@
           // 更新背景图片
           const channel = e.target.value;
           currentChannel = channel; // 更新当前渠道变量
-          
           // 根据不同渠道设置对应背景图片
-          
-          // 重置图片加载错误状态
-          previewBackground.onerror = null;
-          
-          // 设置图片源（添加时间戳清除缓存）
-            const timestamp = new Date().getTime();
-            let imageUrl;
-            
-            // 验证图片路径
             if (channel === '胡源领衔') {
-              imageUrl = '/h1.png';
+              previewBackground.src = './h1.png';
             } else if (channel === '白瑞芳领衔') {
-              imageUrl = '/b1.png';
+              previewBackground.src = './b1.png';
             } else if (channel === 'j1') {
-              imageUrl = '/j1.png';
+              previewBackground.src = './j1.png';
             } else {
-              imageUrl = '/h1.png'; // 默认使用胡源领衔背景
+              previewBackground.src = './h1.png'; // 默认使用胡源领衔背景
             }
-            
-            // 添加时间戳清除缓存
-            const fullUrl = imageUrl + '?' + timestamp;
-            
-            console.log('正在加载背景图片:', fullUrl);
-            
-            // 重新绑定错误事件
-            previewBackground.onerror = function() {
-              console.error('背景图片加载失败:', this.src);
-              console.error('路径是否正确:', this.src);
-              // 尝试使用绝对路径
-              const absoluteUrl = location.origin + '/' + imageUrl;
-              console.log('尝试使用绝对路径:', absoluteUrl);
-              this.src = absoluteUrl;
-            };
-            
-            // 设置图片源
-            previewBackground.src = fullUrl;
           
           // 重新初始化课程编辑区以应用新的渠道设置
           const courseItems = document.querySelectorAll('[data-id]');
